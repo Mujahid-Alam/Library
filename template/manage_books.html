@@ -1,0 +1,58 @@
+{%extends 'base.html'%}
+
+{%block content%}
+
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-lg-4 ms-auto">
+            <form action="" method="post" class="d-flex">
+                <input type="text" name="search" class="fom-control">
+                <input type="submit" value="Search" name="find" class="btn btn-warning">
+                
+            </form>
+        </div>
+    </div>
+    <div class="row ">
+        <div class="col-lg-12">
+            <div class="card">
+                <div class="card-header">Manage Books</div>
+                <div class="ctad-body">
+                    <table class="table">
+                        <tr>
+                            <th>id</th>
+                            <th>Title</th>
+                            <th>Author</th>
+                            <th>Isbn</th>
+                            <th>language</th>
+                            <th>no_of_page</th>
+                            <th>edition</th>
+                            <th>rent_price</th>
+                            <th>Action</th>
+                        </tr>
+                        {%for book in books%}
+                            <tr>
+                                <td>{{book.id}}</td>
+                                <td>{{book.title}}</td>
+                                <td>{{book.author}}</td>
+                                <td>{{book.isbn}}</td>
+                                <td>{{book.language}}</td>
+                                <td>{{book.no_of_page}}</td>
+                                <td>{{book.edition}}</td>
+                                <td>{{book.rent_price}}</td>
+                                <td>
+                                    <div class="btn-group">
+                                        <a href="{% url 'delete_book' book.id%}" class="btn btn-danger">X</a>
+                                        <a href="" class="btn btn-info">Edit</a>
+                                    </div>
+                            </td>
+                                
+                            </tr>
+                        {%endfor%}
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{%endblock%}
