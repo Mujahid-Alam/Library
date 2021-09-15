@@ -22,17 +22,20 @@
                             <th>id</th>
                             <th>First Name</th>
                             <th>Last Name</th>
+                            <th>Code</th>
                             <th>Email</th>
                             <th>is_staff</th>
                             <th>Action</th>
                         </tr>
                         {%for student in students%}
                             <tr>
-                                <td>{{student.id}}</td>
-                                <td>{{student.first_name}}</td>
-                                <td>{{student.last_name}}</td>
-                                <td>{{student.email}}</td>
-                                <td>{{student.is_staff}}</td>
+                                <td>{{student.user_id.id}}</td>
+                                <td>{{student.user_id.first_name}}</td>
+                                <td>{{student.user_id.last_name}}</td>
+                                <td>{{student.code }}</td>
+                                <td>{{student.user_id.email}}</td>
+                                <td>{{student.user_id.is_staff}}</td>
+                                <td>{{student.user_id.is_active}}</td>
                                
                                 <td>
                                     <div class="btn-group">

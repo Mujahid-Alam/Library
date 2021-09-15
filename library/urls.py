@@ -14,6 +14,7 @@ urlpatterns = [
     path('manage-orders/',manage_orders,name="manage_orders"),
     path('active-orders',active_orders,name="active_orders"),
     path('book/delete/<int:id>/',deleteBook,name="delete_book"),
-    path('studnet/delete/<int:id>/',deleteStudent,name="delete_student")
+    path('student/delete/<int:id>/',deleteStudent,name="delete_student"),
+    path("get_user/",getUser,name="get_user"),
     
 ]

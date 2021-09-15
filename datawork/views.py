@@ -10,18 +10,36 @@ def dashboard(r):
 
 
 def manage_students(r):
-    data = {"students":User.objects.filter(is_superuser=False)}
+    data = {"students":UserCode.objects.all()}
     return render(r,"manage_students.html",data)
     
-   
+def getUser(r):
+    if r.method == "POST":
+        code = r.POST.get('code',None)
+        code = int("000"+code)
+        user = UserCode.objects.get(code=code)
+
+        if user.exists():
+            return render(r,"add_entry.html",{"user":user})
+        else:
+            return redirect("add_entry")
 
 
 def add_student(r):
      form = StudentForm(r.POST or None)
-     data = {"form":form}
+     codeForm = UserCodeForm(r.POST or None)
+     data = {"form":form,"codeForm":codeForm}
      if r.method == "POST":
         if form.is_valid():
-            form.save()
+
+            a = form.save(commit=False)
+            a.is_staff = True
+            a.save()
+            user_id = a.pk
+            cf = codeForm.save(commit=False)
+            cf.user_id = User(user_id)
+            cf.save()
+
             return redirect("manage_student")
         else:
             return render(r,"add_student.html",data)
@@ -54,7 +72,8 @@ def add_books(r):
         
         
 def add_entry(r):
-    return render(r,'add_entry.html')
+    data = {"user":None}
+    return render(r,'add_entry.html',data)
 
 def orders(r):
     return render(r,'orders.html')
